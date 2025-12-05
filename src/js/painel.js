@@ -2,6 +2,7 @@ const imagensPainel = document.querySelectorAll('.imagem-painel');
 const setaAvancar = document.getElementById('btn-avancar');
 const setaVoltar = document.getElementById('btn-voltar');
 let imagemAtual = 0;
+const totalImagens = imagensPainel.length - 1;
 
 function esconderImagem(){
     imagensPainel.forEach(imagem =>{
@@ -13,21 +14,27 @@ function mostrarImagem(){
 };
 
 setaAvancar.addEventListener('click', function(){
-    const totalImagens = imagensPainel.length - 1;
-    if (imagemAtual === totalImagens){
-        return;
+    if (imagemAtual === totalImagens - 1){
+        setaAvancar.style.display = 'none';
     }
-
+    if(imagemAtual !== totalImagens - 1){
+        setaVoltar.style.display = 'inline';
+    };
     imagemAtual++;
     esconderImagem();
     mostrarImagem();
 });
-setaVoltar.addEventListener('click', function(){
-    if (imagemAtual === 0){
-        return;
-    }
 
-    imagemAtual--;
+setaVoltar.style.display = 'none';
+setaVoltar.addEventListener('click', function(){
+    if (imagemAtual === 1){
+        setaVoltar.style.display = 'none';
+    }
+    if(imagemAtual !== totalImagens - 1){
+        setaAvancar.style.display = 'inline';
+    };  
+
+    imagemAtual--;   
 
     esconderImagem();
     mostrarImagem();
